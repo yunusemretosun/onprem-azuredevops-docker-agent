@@ -6,7 +6,7 @@ RUN chown -R agent:agent /azp /home/agent
 
 USER agent
 # Another option is to run the agent as root.
-# ENV AGENT_ALLOW_RUNASROOT="true"
+ENV AGENT_ALLOW_RUNASROOT="true"
 
 docker run -d \
 -e AZP_URL="<Azure DevOps instance>" \
@@ -19,4 +19,4 @@ azp-agent:linux
 # docker-agent
 Dockerfile
 # docker in docker agent
-[text](docker-in-docker-agent.dockerfile)
+docker-in-docker-agent.dockerfile
