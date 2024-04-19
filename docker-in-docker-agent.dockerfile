@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TARGETARCH=linux-x64
 ENV AGENT_ALLOW_RUNASROOT="true"
 
-# update and requirements
+# update and requierements
 RUN apt-get update && apt-get upgrade -y && apt-get install -y -qq --no-install-recommends \
     apt-transport-https \
     apt-utils \
