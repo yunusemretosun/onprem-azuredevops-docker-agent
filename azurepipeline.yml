@@ -1,0 +1,32 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+pool:
+  name: 'docker-agent-pool'
+
+variables:
+  dockerRegistryUrl: '10.234.25.44:5000'
+  imageName: 'dockertestapi'
+  tag: '$(Build.BuildId)'
+
+steps:
+- checkout: self
+  submodules: true
+
+- script: |
+    docker build -t $(dockerRegistryUrl)/$(imageName):$(tag) -f $(Build.Repository.LocalPath)/DockerTestAPI/Dockerfile .
+  displayName: 'Build Docker Image'
+
+- script: |
+    docker login $(dockerRegistryUrl) -u testuser -p fzl123
+  displayName: 'Login to Docker Registry'
+
+- script: |
+    docker push $(dockerRegistryUrl)/$(imageName):$(tag)
+  displayName: 'Push Docker Image'
+
+- script: echo "The Docker Image URL is $(dockerRegistryUrl)/$(imageName):$(tag)"
+  displayName: 'Print Docker Image URL'
