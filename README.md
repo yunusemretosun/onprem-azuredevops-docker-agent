@@ -5,7 +5,7 @@ RUN useradd -m -d /home/agent agent
 RUN chown -R agent:agent /azp /home/agent
 
 USER agent
-# Another option is to run the agent as root.
+# Another option is to run the agent as root. Security Issue
 ENV AGENT_ALLOW_RUNASROOT="true"
 
 docker run -d \
