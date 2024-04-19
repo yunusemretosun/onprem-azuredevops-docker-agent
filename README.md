@@ -1,5 +1,5 @@
 # onprem-azuredevops-docker-agent
-Warning
+# Warning
 # Create agent user and set up home directory in dockerfiles
 RUN useradd -m -d /home/agent agent
 RUN chown -R agent:agent /azp /home/agent
@@ -15,3 +15,8 @@ docker run -d \
 -e AZP_AGENT_NAME="Docker Agent - Linux" \
 --name "azp-agent-linux" \
 azp-agent:linux
+
+# docker-agent
+Dockerfile
+# docker in docker agent
+[text](docker-in-docker-agent.dockerfile)
