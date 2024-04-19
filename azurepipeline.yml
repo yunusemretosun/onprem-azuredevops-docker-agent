@@ -8,7 +8,7 @@ pool:
   name: 'docker-agent-pool'
 
 variables:
-  dockerRegistryUrl: '10.234.25.44:5000'
+  dockerRegistryUrl: 'ip:5000'
   imageName: 'dockertestapi'
   tag: '$(Build.BuildId)'
 
@@ -21,7 +21,7 @@ steps:
   displayName: 'Build Docker Image'
 
 - script: |
-    docker login $(dockerRegistryUrl) -u testuser -p fzl123
+    docker login $(dockerRegistryUrl) -u testuser -p password123
   displayName: 'Login to Docker Registry'
 
 - script: |

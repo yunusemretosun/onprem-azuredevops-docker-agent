@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TARGETARCH=linux-x64
 ENV AGENT_ALLOW_RUNASROOT="true"
 
-# Sistem güncellemeleri ve temel gereksinimleri kurma
+# update and requirements
 RUN apt-get update && apt-get upgrade -y && apt-get install -y -qq --no-install-recommends \
     apt-transport-https \
     apt-utils \
@@ -18,26 +18,24 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y -qq --no-install-
     software-properties-common \
     gnupg-agent
 
-# Azure CLI kurulumu
+# Azure CLI inst.
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-# Docker resmi GPG anahtarını ekleyin ve repository'i kurun
+# Docker GPG key and repo
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
     && add-apt-repository \
     "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
     && apt-get update
 
-# Docker CE, CLI, ve Containerd kurulumu
+# Docker CE, CLI, and Containerd inst.
 RUN apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# Docker Compose kurulumu
+# Docker Compose inst.
 RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose \
     && chmod +x /usr/local/bin/docker-compose
 
-# Çalışma dizini
 WORKDIR /azp
 
-# Başlangıç script'ini kopyala ve çalıştırılabilir yap
 COPY ./start.sh .
 RUN chmod +x start.sh
 
